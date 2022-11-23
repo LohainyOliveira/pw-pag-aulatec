@@ -1,1 +1,0 @@
-# pw-pag-aulatec

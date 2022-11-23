@@ -11,8 +11,8 @@ class Ordem extends Crud{
 
     #metodos set's
 
-    public function setId($id){
-        $this->idOS = $id;
+    public function setId($idOS){
+        $this->idOS = $idOS;
     }
 
     public function setData($dataOS){
@@ -79,7 +79,7 @@ class Ordem extends Crud{
         return $conn->lastInsertId();
     }
 
-    public function atualizar($campo,$id)
+    public function atualizar($campo,$idOS)
     {
 
         
@@ -92,4 +92,12 @@ class Ordem extends Crud{
         return $stmt->fetchAll();
     }
 
+    public function deletarOS($campo, $idOS){
+        $sqlDel = "delete from ItemOS where 
+        $campo=:delPar;";
+        $sqlDel .= "delete from {$this->tabela} where $campo=:delPar;";
+        $stmt = Conexao::prepare($sqlDel);
+        $stmt->bindParam(':delPar',$idOS,PDO::PARAM_INT);
+        $stmt->execute(); 
+    }
 }

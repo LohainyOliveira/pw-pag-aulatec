@@ -16,6 +16,19 @@
         spl_autoload_register(function ($class) {
             require_once "./Classes/{$class}.class.php";
         });
+        if (filter_has_var(INPUT_GET, 'idDel')){
+            $ordem = new Ordem();
+            $id = filter_input(INPUT_GET, 'idDel');
+            $ordem->deletarOS('idOS', $id);
+        
+            ?>
+            <script>
+                window.location.href = 'ordens.php';
+            </script>
+        <?php
+        }
+
+
         if (filter_has_var(INPUT_POST, 'btnGravar')) {
             $ordem = new Ordem();
             $id = filter_input(INPUT_POST, 'txtId');
